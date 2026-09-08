@@ -1,0 +1,138 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Apex Drive AI — Car Rental Assistant</title>
+  <meta name="description" content="Local CPU-powered car rental AI assistant by Apex Drive.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+  <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
+  <link rel="stylesheet" href="/static/styles.css">
+</head>
+
+<body>
+  <div class="app-layout">
+
+    <div class="glow-orb-1" aria-hidden="true"></div>
+    <div class="glow-orb-2" aria-hidden="true"></div>
+
+    <aside class="sidebar">
+      <div class="brand">
+        <div class="brand-mark" aria-hidden="true">
+          <svg width="36" height="36" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <polygon points="18,3 33,30 3,30" stroke="#ffffff" stroke-width="2" fill="none" stroke-linejoin="round"/>
+            <line x1="18" y1="3" x2="18" y2="30" stroke="#ffffff" stroke-width="1.2" stroke-dasharray="2 3" opacity="0.45"/>
+            <circle cx="18" cy="18" r="3.5" fill="#ffffff" opacity="0.9"/>
+          </svg>
+        </div>
+        <div class="brand-title">
+          <h2>Apex Drive</h2>
+          <span>AI Car Rental Assistant</span>
+        </div>
+      </div>
+
+      <button id="new-chat-btn" class="btn-new-chat">
+        <i data-lucide="plus" class="icon-sm"></i>
+        New Inquiry
+      </button>
+
+      <div class="sidebar-section">
+        <h3><i data-lucide="gauge" class="icon-xs"></i> Fleet &amp; Rates</h3>
+        <div class="fleet-list">
+          <div class="fleet-item">
+            <span class="fleet-item-left"><i data-lucide="car" class="icon-sm fleet-icon"></i>Economy</span>
+            <strong>$45/day</strong>
+          </div>
+          <div class="fleet-item">
+            <span class="fleet-item-left"><i data-lucide="truck" class="icon-sm fleet-icon"></i>SUV / Family</span>
+            <strong>$85/day</strong>
+          </div>
+          <div class="fleet-item">
+            <span class="fleet-item-left"><i data-lucide="zap" class="icon-sm fleet-icon"></i>Electric (EV)</span>
+            <strong>$75/day</strong>
+          </div>
+          <div class="fleet-item">
+            <span class="fleet-item-left"><i data-lucide="gem" class="icon-sm fleet-icon"></i>Luxury Sedan</span>
+            <strong>$125/day</strong>
+          </div>
+        </div>
+      </div>
+
+      <div class="sidebar-section">
+        <h3><i data-lucide="shield" class="icon-xs"></i> Insurance Tiers</h3>
+        <p class="ins-text"><i data-lucide="shield" class="icon-xs ins-icon"></i><span><strong>Standard</strong> — Included ($1,500 ded.)</span></p>
+        <p class="ins-text"><i data-lucide="shield-check" class="icon-xs ins-icon"></i><span><strong>Silver</strong> — +$18/day ($300 ded.)</span></p>
+        <p class="ins-text"><i data-lucide="award" class="icon-xs ins-icon"></i><span><strong>Gold</strong> — +$30/day ($0 ded.)</span></p>
+      </div>
+
+      <div class="sidebar-footer">
+        <div class="status-dot"></div>
+        <i data-lucide="cpu" class="icon-xs" style="opacity:0.6"></i>
+        <span>Local CPU Inference</span>
+      </div>
+    </aside>
+
+    <main class="chat-main">
+      <header class="chat-header">
+        <div class="header-title-group">
+          <i data-lucide="message-square-dot" class="icon-sm" style="opacity:0.7"></i>
+          <h1>Apex Car Rental Assistant</h1>
+        </div>
+        <div class="header-metrics" id="header-metrics">
+          <i data-lucide="activity" class="icon-xs"></i>
+          <span id="metrics-text">Ready</span>
+        </div>
+      </header>
+
+      <section class="messages-container" id="messages-container">
+        <div class="welcome-box" id="welcome-box">
+          <div class="welcome-icon-wrap">
+            <svg width="48" height="48" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <polygon points="18,3 33,30 3,30" stroke="#ffffff" stroke-width="1.8" fill="none" stroke-linejoin="round"/>
+              <circle cx="18" cy="18" r="4" fill="#ffffff" opacity="0.85"/>
+            </svg>
+          </div>
+          <h2>Welcome to Apex Car Rental</h2>
+          <p>Check availability, compare insurance, get instant quotes — all powered locally on your CPU.</p>
+          <div class="suggestions">
+            <button class="chip" onclick="sendQuickPrompt('What cars do you have available and what are the prices?')">
+              <i data-lucide="car" class="icon-sm"></i>Browse Fleet &amp; Rates
+            </button>
+            <button class="chip" onclick="sendQuickPrompt('I want to rent an SUV for 3 days starting this Friday.')">
+              <i data-lucide="calendar-check" class="icon-sm"></i>Book 3-Day SUV
+            </button>
+            <button class="chip" onclick="sendQuickPrompt('What are your insurance options and deductibles?')">
+              <i data-lucide="shield-check" class="icon-sm"></i>Compare Insurance
+            </button>
+            <button class="chip" onclick="sendQuickPrompt('Can you write a Python script for binary search?')">
+              <i data-lucide="lock-keyhole" class="icon-sm"></i>Guardrail Test
+            </button>
+          </div>
+        </div>
+      </section>
+
+      <footer class="input-container">
+        <form id="chat-form">
+          <textarea id="message-input" placeholder="Ask about rentals, pricing, or availability..." rows="1"></textarea>
+          <button type="submit" id="send-btn" aria-label="Send message">
+            <i data-lucide="arrow-up" class="icon-sm"></i>
+          </button>
+        </form>
+        <p class="input-hint">
+          <i data-lucide="info" class="icon-xs"></i>
+          Press <kbd>Enter</kbd> to send &nbsp;&middot;&nbsp; <kbd>Shift+Enter</kbd> for new line
+        </p>
+      </footer>
+    </main>
+
+  </div>
+
+  <script src="/static/app.js"></script>
+  <script>lucide.createIcons();</script>
+</body>
+
+</html>
