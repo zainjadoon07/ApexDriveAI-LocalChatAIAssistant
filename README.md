@@ -1,6 +1,6 @@
 ﻿<div align="center">
 
-# 🚗 Apex Drive AI
+# Apex Drive AI
 ### Local CPU Conversational Car Rental Assistant
 
 [![Python](https://img.shields.io/badge/Python-3.11+-3776AB?style=flat-square&logo=python&logoColor=white)](https://python.org)
@@ -32,7 +32,7 @@ Apex Drive AI is an NLP assignment implementation of a **production-grade, domai
 
 ---
 
-## ✨ Features
+##  Features
 
 | Feature | Description |
 |---|---|
@@ -49,7 +49,7 @@ Apex Drive AI is an NLP assignment implementation of a **production-grade, domai
 
 ---
 
-## 🏗 Architecture
+##  Architecture
 
 ### High-Level System Diagram
 
